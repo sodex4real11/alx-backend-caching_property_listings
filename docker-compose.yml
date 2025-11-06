@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: propertydb
+      POSTGRES_USER: propertyuser
+      POSTGRES_PASSWORD: propertypass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data   # ✅ هنا أضفنا الـ volume المطلوب
+
+volumes:
+  postgres_data:
+  redis_data:   # ✅ عرّف الـ volume تحت volumes
